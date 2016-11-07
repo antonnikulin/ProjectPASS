@@ -1,0 +1,11 @@
+<div>
+    <input type="text" ng-model="tileCtrl.currentTile.name">
+    <input type="text" ng-model="tileCtrl.currentTile.address">
+    <input type="text" ng-model="tileCtrl.currentTile.login">
+    <input type="text" ng-model="tileCtrl.currentTile.password">
+    <div class="buttons">
+        <button ng-click="tileCtrl.goToAddress();">Перейти</button>
+        <button ng-click="tileCtrl.saveChanges();" id="save-changes">Сохранить изменения</button>
+        <button ng-click="tileCtrl.removeTile();">Удалить</button>
+    </div>
+</div>

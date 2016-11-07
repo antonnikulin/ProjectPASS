@@ -1,0 +1,135 @@
+@import 'vars.less';
+h1 {
+    color: @c-dark;
+    font-size: 48px;
+    text-align: center;
+}
+
+body {
+    background-color: @c-back;
+    font-family: Mono;
+    font-size: 20px;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+}
+
+button {
+    background-color: @c-b-light;
+    color: @c-obj-back;
+    border: none;
+    outline: none;
+    font-family: Mono;
+    font-size: 18px;
+    padding: 5px 15px;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.2s;
+    &:hover,
+    &:focus {
+        background-color: lighten(@c-b-light, 5%);
+    }
+    &:active {
+        background-color: @c-b-dark;
+    }
+    &.changed {
+        background-color: lighten(@c-b-light, 10%);
+    }
+}
+
+.transparent {
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.2s;
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: transparent;
+    }
+    &.back {
+        background-image: url(../assets/icons/internet.png);
+        &:hover,
+        &:active {
+            background-image: url(../assets/icons/internet-hover.png)
+        }
+    }
+    &.exit {
+        background-image: url(../assets/icons/logout.png);
+        &:hover,
+        &:active {
+            background-image: url(../assets/icons/logout-hover.png)
+        }
+    }
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.tile {
+    width: 10vw;
+    min-width: 190px;
+    min-height: 25px;
+    background-color: @c-obj-back;
+    padding: 15px;
+    margin: 10px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: @c-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    border: 2px solid @c-obj-back;
+    overflow: hidden;
+    &:hover,
+    &:focus {
+        border-color: @c-b-light;
+    }
+    &.add {
+        background-image: url(../assets/icons/add.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 20px;
+    }
+}
+
+input {
+    background-color: @c-g-light;
+    padding: 5px;
+    font-family: Mono;
+    font-size: 18px;
+    min-width: 400px;
+    color: #2f2f2f;
+    border: none;
+    outline: none;
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+    border: 2px solid @c-g-dark;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,52 @@
+@import 'vars.less';
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+h1 {
+    margin: 10px 0 40px;
+}
+
+button {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
+
+#sign {
+    text-align: center;
+    input {
+        min-width: auto;
+    }
+    .empty {
+        background-color: gray;
+    }
+    .denied {
+        background-color: #d85151;
+        color: @c-back;
+    }
+    .eq {
+        background-color: #d85151;
+        color: @c-back;
+    }
+}
+
+.a-changer {
+    display: inline-block;
+    color: @c-dark;
+    margin-top: 80px;
+    padding: 5px 15px;
+    transition: color 0.2s;
+    &:hover,
+    &:focus {
+        color: @c-b-light;
+    }
+}

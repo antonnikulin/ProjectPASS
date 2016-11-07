@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="Pass">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project PASS</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <header ng-controller="PageController as page">
+        <button class="transparent back" ng-click="page.goToHome()"></button>
+        <h1>Project PASS</h1>
+        <button class="transparent exit" ng-click="page.logout()"></button>
+    </header>
+    <div id="content" ng-view></div>
+    <script src="assets/js/jquery-2.2.3.js"></script>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-route.min.js"></script>
+    <script src="app/pass.js"></script>
+    <script src="app/page/page.controller.js"></script>
+    <script src="app/router.js"></script>
+    <script src="app/tile/tiles.controller.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+<form action="">
+    <input type="text" placeholder="Название сайта*" ng-model="tileCtrl.newTile.name">
+    <input type="text" placeholder="Адрес сайта" ng-model="tileCtrl.newTile.address">
+    <input type="text" placeholder="Логин" ng-model="tileCtrl.newTile.login">
+    <input type="text" placeholder="Пароль*" ng-model="tileCtrl.newTile.password">
+    <div class="buttons">
+        <button ng-click="(tileCtrl.newTile.name && tileCtrl.newTile.password) && tileCtrl.saveNewTile()" ng-show="tileCtrl.newTile.name && tileCtrl.newTile.password">Сохранить</button>
+    </div>
+</form>
