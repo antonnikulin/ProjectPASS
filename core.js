@@ -15,6 +15,24 @@ const access = require('access');
 // ---
 
 let win;
+let createWindow = () => {
+    win = new BrowserWindow({
+        width: 1000,
+        height: 800
+    });
+
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, '/view/pages/login.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
+    win.webContents.openDevTools();
+
+    win.on('closed', () => {
+        win = null
+    });
+}
 
 app.on('ready', createWindow);
 
@@ -41,20 +59,12 @@ ipc.on('registration', (event, arg) => {
         dbManager.getUsers((arr) => {
             if (hasUser(user, arr)) {
                 access.provide();
-                win.loadURL(url.format({
-                    pathname: path.join(__dirname, '/view/index.html'),
-                    protocol: 'file:',
-                    slashes: true
-                }));
+                loadIndex();
             } else {
                 dbManager.writeNewUser(user, () => {
                     dbManager.createDb(user.username);
                     access.provide();
-                    win.loadURL(url.format({
-                        pathname: path.join(__dirname, '/view/index.html'),
-                        protocol: 'file:',
-                        slashes: true
-                    }));
+                    loadIndex();
                 });
             }
         });
@@ -71,11 +81,7 @@ ipc.on('authorization', (event, arg) => {
         dbManager.getUsers((arr) => {
             if (hasUser(user, arr)) {
                 access.provide();
-                win.loadURL(url.format({
-                    pathname: path.join(__dirname, '/view/index.html'),
-                    protocol: 'file:',
-                    slashes: true
-                }));
+                loadIndex();
                 event.returnValue = true;
             } else {
                 event.returnValue = false;
@@ -84,26 +90,12 @@ ipc.on('authorization', (event, arg) => {
     });
 });
 
+ipc.on('addNewTile', (event, arg) => {
+    let encrypted = crypter.encryptTile(arg);
+    dbManager.addTile(encrypted, crypter.secUser(), () => {});
+});
+
 // Внутренние функции
-function createWindow() {
-    win = new BrowserWindow({
-        width: 1000,
-        height: 800
-    });
-
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, '/view/pages/login.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-    win.webContents.openDevTools();
-
-    win.on('closed', () => {
-        win = null
-    });
-}
-
 let hasUser = (user, arr) => {
     let isEqual = false;
 
@@ -116,3 +108,11 @@ let hasUser = (user, arr) => {
 
     return isEqual;
 };
+
+let loadIndex = () => {
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, '/view/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+}

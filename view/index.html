@@ -14,6 +14,12 @@
         <button class="transparent exit" ng-click="page.logout()"></button>
     </header>
     <div id="content" ng-view></div>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
     <script src="assets/js/jquery-2.2.3.js"></script>
     <script src="assets/js/angular.min.js"></script>
     <script src="assets/js/angular-route.min.js"></script>
@@ -21,6 +27,9 @@
     <script src="app/page/page.controller.js"></script>
     <script src="app/router.js"></script>
     <script src="app/tile/tiles.controller.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
 </body>
 
 </html>

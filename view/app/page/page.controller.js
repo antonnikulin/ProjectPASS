@@ -6,7 +6,7 @@
             }
 
             this.logout = function () {
-                $http.get('ajax/logout').success(function () {
+                $http.get('logout').success(function () {
                     document.location = '/';
                 })
             }

@@ -4,6 +4,6 @@
     <input type="text" placeholder="Логин" ng-model="tileCtrl.newTile.login">
     <input type="text" placeholder="Пароль*" ng-model="tileCtrl.newTile.password">
     <div class="buttons">
-        <button ng-click="(tileCtrl.newTile.name && tileCtrl.newTile.password) && tileCtrl.saveNewTile()" ng-show="tileCtrl.newTile.name && tileCtrl.newTile.password">Сохранить</button>
+        <button ng-click="(tileCtrl.newTile.name && tileCtrl.newTile.password) && tileCtrl.addNewTile()" ng-show="tileCtrl.newTile.name && tileCtrl.newTile.password">Сохранить</button>
     </div>
 </form>
