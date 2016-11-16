@@ -1,4 +1,5 @@
 (function () {
+    const ipc = require('electron').ipcRenderer;
     var $username = $('input[name=username]');
     var $password = $('input[name=password]');
     var $repeat = $('input[name=password-repeat]');
@@ -17,7 +18,6 @@
             authorization($username, $password);
         }
 
-        console.log('Должны вернуть false');
         return false;
     });
 
@@ -67,34 +67,16 @@
     }
 
     function registration($username, $password) {
-        $.ajax({
-            url: 'ajax/registration',
-            type: 'POST',
-            data: {
-                username: $username.val(),
-                password: $password.val()
-            },
-            success: function () {
-                document.location.href = "/";
-            }
+        ipc.send('registration', {
+            username: $username.val(),
+            password: $password.val()
         });
     }
 
     function authorization($username, $password) {
-        $.ajax({
-            url: 'ajax/authorization',
-            type: 'POST',
-            data: {
-                username: $username.val(),
-                password: $password.val()
-            },
-            success: function () {
-                document.location.href = "/";
-            },
-            error: function () {
-                markInput($username, 'denied');
-                markInput($password, 'denied');
-            }
+        ipc.send('authorization', {
+            username: $username.val(),
+            password: $password.val()
         });
     }
 })();
