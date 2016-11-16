@@ -74,9 +74,14 @@
     }
 
     function authorization($username, $password) {
-        ipc.send('authorization', {
+        var isAccess = ipc.sendSync('authorization', {
             username: $username.val(),
             password: $password.val()
         });
+
+        if (!isAccess) {
+            markInput($username, 'denied');
+            markInput($password, 'denied');
+        }
     }
 })();

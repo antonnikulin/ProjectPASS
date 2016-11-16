@@ -8,9 +8,11 @@ const ipc = electron.ipcMain;
 const path = require('path');
 const url = require('url');
 
+// --- Мои модули ---
 const crypter = require('crypter');
 const dbManager = require('dbManager');
 const access = require('access');
+// ---
 
 let win;
 
@@ -68,15 +70,15 @@ ipc.on('authorization', (event, arg) => {
 
         dbManager.getUsers((arr) => {
             if (hasUser(user, arr)) {
-                console.log('Has user');
                 access.provide();
                 win.loadURL(url.format({
                     pathname: path.join(__dirname, '/view/index.html'),
                     protocol: 'file:',
                     slashes: true
                 }));
+                event.returnValue = true;
             } else {
-                console.log('Denied');
+                event.returnValue = false;
             }
         });
     });
