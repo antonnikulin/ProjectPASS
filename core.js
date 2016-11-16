@@ -95,6 +95,35 @@ ipc.on('addNewTile', (event, arg) => {
     dbManager.addTile(encrypted, crypter.secUser(), () => {});
 });
 
+ipc.on('getTiles', (event, arg) => {
+    dbManager.getTiles(crypter.secUser(), (data) => {
+        var decrypted = crypter.decryptTiles(data);
+        event.returnValue = data;
+    });
+});
+
+ipc.on('removeTile', (event, arg) => {
+    dbManager.removeTile(crypter.secUser(), arg);
+});
+
+ipc.on('saveChanges', (event, arg) => {
+    let index = arg.index;
+    let encrypted = crypter.encryptTile(arg.tile);
+
+    dbManager.saveTile(crypter.secUser(), encrypted, index, () => {
+        event.returnValue = true;
+    });
+});
+
+ipc.on('logout', () => {
+    access.close();
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, '/view/pages/login.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+});
+
 // Внутренние функции
 let hasUser = (user, arr) => {
     let isEqual = false;

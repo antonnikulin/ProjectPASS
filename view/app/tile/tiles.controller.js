@@ -1,10 +1,14 @@
 (function () {
     const ipc = require('electron').ipcRenderer;
     angular.module('Pass')
-        .controller('TilesController', function ($http, $routeParams) {
+        .controller('TilesController', function ($routeParams) {
             var panel = this;
+            var index = $routeParams.index;
+
+            panel.tiles = ipc.sendSync('getTiles');
 
             panel.newTile = {};
+
             panel.goToAddress = function () {
                 if (panel.currentTile.address.indexOf('http') == -1) {
                     window.open('http://' + panel.currentTile.address);
@@ -14,46 +18,33 @@
             }
 
             panel.saveChanges = function () {
-                $http.post('ajax/saveChanges', $.param({
-                        tile: JSON.stringify(panel.currentTile),
-                        index: $routeParams.index
-                    }))
-                    .success(function () {
-                        var $button = $('#save-changes');
-                        $button.text('Изменения сохранены');
-                        $button.addClass('changed');
+                var success = ipc.sendSync('saveChanges', {
+                    tile: panel.currentTile,
+                    index: index
+                });
 
-                        setTimeout(function () {
-                            $button.removeClass('changed');
-                            $button.text('Сохранить изменения');
-                        }, 3000);
-                    })
-                    .error(function (err) {
-                        console.error(err);
-                    });
+                if (success) {
+                    var $button = $('#save-changes');
+                    $button.text('Изменения сохранены');
+                    $button.addClass('changed');
+
+                    setTimeout(function () {
+                        $button.removeClass('changed');
+                        $button.text('Сохранить изменения');
+                    }, 3000);
+                }
             };
-
 
             panel.addNewTile = function () {
                 ipc.send('addNewTile', panel.newTile);
+                document.location = '#/';
             };
 
             panel.removeTile = function () {
-                $http.post('ajax/removeTile', $.param({
-                    index: $routeParams.index
-                })).success(function () {
-                    document.location = '#/';
-                })
+                ipc.send('removeTile', index);
+                document.location = '#/';
             };
 
-            var index = $routeParams.index;
-
-            $http.get('ajax/getTiles').success(function (data) {
-                panel.tiles = data;
-
-                if (index) {
-                    panel.currentTile = panel.tiles[index];
-                }
-            });
+            panel.currentTile = panel.tiles[index];
         });
 })();

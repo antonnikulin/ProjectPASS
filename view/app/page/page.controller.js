@@ -1,4 +1,5 @@
 (function () {
+    const ipc = require('electron').ipcRenderer;
     angular.module('Pass')
         .controller('PageController', function ($http) {
             this.goToHome = function () {
@@ -6,9 +7,7 @@
             }
 
             this.logout = function () {
-                $http.get('logout').success(function () {
-                    document.location = '/';
-                })
+                ipc.send('logout');
             }
         });
 })();
