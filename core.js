@@ -1,8 +1,9 @@
 'use strict';
 
-const {
-    app, BrowserWindow
-} = require('electron');
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const ipc = electron.ipc;
 
 const path = require('path');
 const url = require('url');
@@ -21,6 +22,10 @@ app.on('activate', () => {
     if (win === null) {
         createWindow()
     }
+});
+
+ipc.on('do-some', () => {
+    console.log('Ура! Я таки перехватил сообщение!');
 });
 
 function createWindow() {
