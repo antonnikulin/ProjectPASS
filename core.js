@@ -82,7 +82,6 @@ ipc.on('authorization', (event, arg) => {
         };
 
         dbManager.getUsers((arr) => {
-            console.log(arr);
             if (hasUser(user, arr)) {
                 access.provide();
                 loadIndex();
@@ -102,7 +101,7 @@ ipc.on('addNewTile', (event, arg) => {
 ipc.on('getTiles', (event, arg) => {
     dbManager.getTiles(crypter.secUser(), (data) => {
         var decrypted = crypter.decryptTiles(data);
-        event.returnValue = data;
+        event.returnValue = decrypted;
     });
 });
 
