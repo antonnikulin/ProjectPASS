@@ -79,6 +79,8 @@
             password: $password.val()
         });
 
+        console.log(isAccess);
+
         if (!isAccess) {
             markInput($username, 'denied');
             markInput($password, 'denied');

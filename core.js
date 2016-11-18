@@ -8,6 +8,8 @@ const ipc = electron.ipcMain;
 const path = require('path');
 const url = require('url');
 
+const fs = require('fs');
+
 // --- Мои модули ---
 const crypter = require('crypter');
 const dbManager = require('dbManager');
@@ -28,7 +30,7 @@ let createWindow = () => {
         slashes: true
     }));
 
-    //win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.on('closed', () => {
         win = null
@@ -80,12 +82,13 @@ ipc.on('authorization', (event, arg) => {
         };
 
         dbManager.getUsers((arr) => {
+            console.log(arr);
             if (hasUser(user, arr)) {
                 access.provide();
                 loadIndex();
                 event.returnValue = true;
             } else {
-                event.returnValue = false;
+                event.returnValue = 'i am here!!!';
             }
         });
     });

@@ -3,6 +3,6 @@
     "version": "0.1.0",
     "main": "core.js",
     "scripts": {
-        "build": "electron-packager . ProectPASS --platform=win32 --arch=x64 --version=1.4.5 --app-version=0.1.0 --out=dist --ignore=dist --prune"
+        "build": "electron-packager . ProectPASS3 --platform=win32 --arch=x64 --version=1.4.5 --app-version=0.1.0 --out=dist --ignore=dist --prune --icon=./view/assets/icons/favicon.ico --overwrite"
     }
 }
