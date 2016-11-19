@@ -1,6 +1,5 @@
 (function () {
     const ipc = require('electron').ipcRenderer;
-    const open = require('open');
 
     angular.module('Pass')
         .controller('TilesController', function ($routeParams) {
@@ -12,11 +11,10 @@
             panel.newTile = {};
 
             panel.goToAddress = function () {
-                if (panel.currentTile.address.indexOf('http') == -1) {
-                    open('http://' + panel.currentTile.address);
-                } else {
-                    window.open(panel.currentTile.address);
-                }
+                var address = panel.currentTile.address;
+                if (address.indexOf('http') == -1) address = 'http://' + address;
+
+                ipc.send('open', address);
             }
 
             panel.saveChanges = function () {

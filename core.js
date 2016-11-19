@@ -7,6 +7,7 @@ const ipc = electron.ipcMain;
 
 const path = require('path');
 const url = require('url');
+const open = require('open');
 
 const fs = require('fs');
 
@@ -30,7 +31,7 @@ let createWindow = () => {
         slashes: true
     }));
 
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
 
     win.on('closed', () => {
         win = null
@@ -125,6 +126,10 @@ ipc.on('logout', () => {
         protocol: 'file:',
         slashes: true
     }));
+});
+
+ipc.on('open', (event, arg) => {
+    open(arg);
 });
 
 // Внутренние функции
