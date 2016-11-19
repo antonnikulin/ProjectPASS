@@ -88,7 +88,7 @@ ipc.on('authorization', (event, arg) => {
                 loadIndex();
                 event.returnValue = true;
             } else {
-                event.returnValue = 'i am here!!!';
+                event.returnValue = false;
             }
         });
     });
