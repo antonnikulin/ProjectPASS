@@ -12,14 +12,16 @@
 Чтобы собрать приложение в полноценный билд, необходимо, для начала иметь установленный Node.js, это очень просто.
 Далее, необходимо будет глобально установить electron-prebuilt и electron-packager:
 
-npm i -g electron-prebuilt
-npm i -g electron-packager
+<code>npm i -g electron-prebuilt</code><br>
+<code>npm i -g electron-packager</code>
 
 Потом нужно перейти в директорию, например, D:\Username\Project PASS, для Windows:
 
-cd D:\Username\Project PASS и запустить установку:
+<code>cd D:\Username\Project PASS</code><br>
 
-npm run build
+и запустить установку:
+
+<code>npm run build</code>
 
 Далее приложение соберется и будет доступно в папке Dist. Пока только для Windows.
 
